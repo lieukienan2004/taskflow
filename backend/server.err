@@ -1,0 +1,90 @@
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at register (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:33:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:453:9)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\xampp\htdocs\khoaluan\khoaluan\backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at login (C:\xampp\htdocs\khoaluan\khoaluan\backend\src\controllers\authController.js:69:23)
