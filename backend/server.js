@@ -36,7 +36,7 @@ const setupSocket = require('./src/socketHandler');
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : '*',
+    origin: true,
     methods: ['GET', 'POST']
   }
 });
@@ -55,9 +55,8 @@ app.use((req, res, next) => {
 });
 
 // Middleware
-const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : '*'
 app.use(cors({
-  origin: corsOrigins === '*' ? true : corsOrigins,
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
