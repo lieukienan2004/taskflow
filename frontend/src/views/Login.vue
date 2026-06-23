@@ -2357,10 +2357,11 @@ const saveServerSetup = () => {
   .hero-buttons { flex-direction: column; align-items: center; }
   .btn-primary, .btn-secondary { justify-content: center; width: 100%; min-height: 44px; }
   .hero-features-row { justify-content: center; }
-  .hero-right { display: none; }
-  .hero-visual-wrap { max-width: 260px; margin: 0 auto; }
-  .hero-stat-badge { padding: 8px 12px; }
+  .hero-right { display: flex; justify-content: center; width: 100%; }
+  .hero-visual-wrap { max-width: 220px; margin: 0 auto; }
+  .hero-stat-badge { padding: 6px 10px; font-size: 0.72rem; }
   .hsb-label { display: none; }
+  .hsb-value { font-size: 0.78rem; }
   .ring { border-width: 1px; }
 
   .intro-section { padding: 48px 16px; }

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(100) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NULL,
   full_name VARCHAR(255) NULL,
   role ENUM('user', 'admin') DEFAULT 'user',
   status ENUM('active', 'inactive', 'banned') DEFAULT 'active',
@@ -15,8 +16,8 @@ CREATE TABLE IF NOT EXISTS users (
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Tạo admin account
-INSERT IGNORE INTO users (username, email, password, full_name, role) VALUES
-('admin', 'admin@taskflow.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'admin');
+INSERT IGNORE INTO users (username, email, password, name, full_name, role) VALUES
+('admin', 'admin@taskflow.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin', 'Admin', 'admin');
 
 -- Tạo bảng tasks
 CREATE TABLE IF NOT EXISTS tasks (
