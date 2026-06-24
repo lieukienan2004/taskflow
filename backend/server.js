@@ -95,8 +95,27 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/reminders', reminderRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'TaskFlow API đang hoạt động 🚀', timestamp: new Date().toISOString() });
+const pool = require('./src/config/database');
+app.get('/api/health', async (req, res) => {
+  try {
+    const [rows] = await pool.execute('SELECT 1 as ok');
+    res.json({ success: true, message: 'TaskFlow API đang hoạt động 🚀', db: 'connected', timestamp: new Date().toISOString() });
+  } catch (e) {
+    res.json({ success: true, message: 'TaskFlow API đang hoạt động (DB error)', db: e.message, timestamp: new Date().toISOString() });
+  }
+});
+
+// Debug: test login directly
+app.post('/api/debug-login', async (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+    if (!email || !password) return res.json({ step: 'params', ok: false, msg: 'missing params' });
+    const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
+    if (!rows.length) return res.json({ step: 'query', ok: false, msg: 'user not found' });
+    res.json({ step: 'found', ok: true, user: { id: rows[0].id, email: rows[0].email, name: rows[0].name } });
+  } catch (e) {
+    res.json({ step: 'error', ok: false, msg: e.message });
+  }
 });
 
 // 404 handler
