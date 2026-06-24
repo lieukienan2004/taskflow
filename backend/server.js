@@ -125,8 +125,8 @@ app.use((req, res) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ success: false, message: 'Lỗi server nội bộ' });
+  console.error('[Global Error]', err.message, err.stack);
+  res.status(500).json({ success: false, message: 'Lỗi server nội bộ', debug: err.message });
 });
 
 server.listen(PORT, () => {
