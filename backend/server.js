@@ -95,14 +95,8 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/reminders', reminderRoutes);
 
 // Health check
-const pool = require('./src/config/database');
-app.get('/api/health', async (req, res) => {
-  try {
-    const [rows] = await pool.execute('SELECT 1 as ok');
-    res.json({ success: true, message: 'TaskFlow API đang hoạt động 🚀', db: 'connected', timestamp: new Date().toISOString() });
-  } catch (e) {
-    res.json({ success: true, message: 'TaskFlow API đang hoạt động (DB error)', db: e.message, timestamp: new Date().toISOString() });
-  }
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, message: 'TaskFlow API đang hoạt động 🚀', timestamp: new Date().toISOString() });
 });
 
 // 404 handler
@@ -113,7 +107,7 @@ app.use((req, res) => {
 // Error handler
 app.use((err, req, res, next) => {
   console.error('[Global Error]', err.message);
-  res.status(500).json({ success: false, message: 'Lỗi server nội bộ', error: err.message });
+  res.status(500).json({ success: false, message: 'Lỗi server nội bộ' });
 });
 
 server.listen(PORT, () => {
