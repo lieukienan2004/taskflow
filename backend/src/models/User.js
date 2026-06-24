@@ -3,10 +3,20 @@ const bcrypt = require('bcryptjs');
 
 class User {
   static async findByEmail(email) {
-    const [rows] = await pool.execute(
-      'SELECT * FROM users WHERE email = ? OR name = ?', [email, email]
-    );
-    return rows[0] || null;
+    try {
+      const [rows] = await pool.execute(
+        'SELECT * FROM users WHERE email = ?', [email]
+      );
+      return rows[0] || null;
+    } catch (e) {
+      if (e.message.includes('name')) {
+        const [rows] = await pool.execute(
+          'SELECT * FROM users WHERE email = ?', [email]
+        );
+        return rows[0] || null;
+      }
+      throw e;
+    }
   }
 
   static async findById(id) {

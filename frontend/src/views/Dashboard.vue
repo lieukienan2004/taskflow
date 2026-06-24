@@ -1281,18 +1281,17 @@ const postponedTasks = computed(() => {
 
 @media (max-width: 768px) {
   .dashboard-page { padding: 0; }
-  .page-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px; }
-  .page-title { font-size: 1.2rem; }
+  .dashboard-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px; }
   .header-actions { display: flex; gap: 8px; }
   .header-actions .btn { flex: 1; min-height: 44px; }
-  .dashboard-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px; }
+  .dashboard-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; }
   .s-card-inner { padding: 12px; gap: 10px; }
   .s-icon { width: 36px; height: 36px; border-radius: 10px; }
   .s-val { font-size: 1.25rem; }
   .s-lbl { font-size: 0.75rem; }
-  .dashboard-charts { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
+  .dashboard-charts { grid-template-columns: 1fr; gap: 16px; padding: 0; }
   .chart-card { height: 240px; }
-  .dashboard-widgets { grid-template-columns: 1fr; gap: 16px; padding: 0 16px; }
+  .dashboard-widgets { grid-template-columns: 1fr; gap: 16px; padding: 0; }
   .analytics-grid { grid-template-columns: 1fr; gap: 16px; }
   .analytics-grid .chart-card { min-height: 240px; }
   .eco-hub-grid { grid-template-columns: 1fr 1fr; gap: 10px; }

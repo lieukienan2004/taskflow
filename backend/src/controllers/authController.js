@@ -102,7 +102,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, name: user.name, role: user.role },
+      { id: user.id, email: user.email, name: user.name || user.username, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
@@ -114,7 +114,7 @@ const login = async (req, res) => {
       data: { user: safeUser, token }
     });
   } catch (err) {
-    console.error(err);
+    console.error('[Login Error]', err.message || err);
     res.status(500).json({ success: false, message: 'Lỗi server.' });
   }
 };

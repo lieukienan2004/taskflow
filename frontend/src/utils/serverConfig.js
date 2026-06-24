@@ -1,6 +1,6 @@
 const STORAGE_KEY = 'taskflow_server_url'
 const DEFAULT_WEB = '/api'
-const DEFAULT_CAPACITOR = 'http://10.0.2.2:3001'
+const DEFAULT_CAPACITOR = 'https://taskflow-backend-0pj4.onrender.com'
 
 export function isCapacitor() {
   if (typeof window === 'undefined') return false
@@ -33,6 +33,5 @@ export function getHost() {
 }
 
 export function needsServerSetup() {
-  if (!isCapacitor()) return false
-  return !localStorage.getItem(STORAGE_KEY)
+  return false
 }

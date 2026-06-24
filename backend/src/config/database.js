@@ -409,11 +409,11 @@ async function safeCreateTable(pool, sql, label) {
         level INT DEFAULT 1,
         streak INT DEFAULT 0,
         last_completed_date DATE NULL,
-        achievements JSON DEFAULT ('[]'),
+        achievements JSON DEFAULT '[]',
         converted_notes_count INT DEFAULT 0,
         gold INT DEFAULT 50,
         class_type VARCHAR(20) DEFAULT NULL,
-        purchased_titles JSON DEFAULT ('[]'),
+        purchased_titles JSON DEFAULT '[]',
         active_title VARCHAR(100) DEFAULT NULL,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
