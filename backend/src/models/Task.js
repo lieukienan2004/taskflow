@@ -39,7 +39,7 @@ class Task {
     } else if (filters.view === 'objective') {
       query += ' AND t.id IN (SELECT task_id FROM objective_tasks WHERE task_id IS NOT NULL)';
     }
-    query += ' ORDER BY FIELD(t.priority,"high","medium","low"), t.due_date ASC, t.created_at DESC';
+    query += " ORDER BY CASE t.priority WHEN 'high' THEN 1 WHEN 'medium' THEN 2 WHEN 'low' THEN 3 ELSE 4 END, t.due_date ASC, t.created_at DESC";
 
     // Pagination
     const page = Math.max(1, parseInt(filters.page) || 1);
