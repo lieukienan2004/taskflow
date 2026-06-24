@@ -51,8 +51,7 @@ class Task {
     const [countRows] = await pool.execute(countQuery, params);
     const total = countRows[0].total;
 
-    query += ` LIMIT ? OFFSET ?`;
-    params.push(limit, offset);
+    query += ` LIMIT ${limit} OFFSET ${offset}`;
 
     const [rows] = await pool.execute(query, params);
     return { tasks: rows, total, page, limit, totalPages: Math.ceil(total / limit) };
