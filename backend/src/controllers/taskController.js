@@ -15,8 +15,8 @@ const getAllTasks = async (req, res) => {
     const result = await Task.getAll(req.user.id, filters);
     res.json({ success: true, data: result.tasks, pagination: { page: result.page, limit: result.limit, total: result.total, totalPages: result.totalPages } });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: 'Lỗi server' });
+    console.error('[Tasks Error]', err.message);
+    res.status(500).json({ success: false, message: 'Lỗi server', error: err.message });
   }
 };
 
