@@ -2,22 +2,16 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/authStore'
 import Dashboard from '@/views/Dashboard.vue'
 import Tasks from '@/views/Tasks.vue'
-import Kanban from '@/views/Kanban.vue'
 import Profile from '@/views/Profile.vue'
 import Calendar from '@/views/Calendar.vue'
 import Notes from '@/views/Notes.vue'
 import Login from '@/views/Login.vue'
-import Register from '@/views/Register.vue'
 import TaskDetail from '@/views/TaskDetail.vue'
-import Trash from '@/views/Trash.vue'
 import Reports from '@/views/Reports.vue'
-import PremiumFocusRoom from '@/views/PremiumFocusRoom.vue'
-import DependencyGraph from '@/views/DependencyGraph.vue'
 import Projects from '@/views/Projects.vue'
 import ProjectDetail from '@/views/ProjectDetail.vue'
-import TimeboxPlanner from '@/views/TimeboxPlanner.vue'
-import TaskTemplates from '@/views/TaskTemplates.vue'
 import SemesterPlan from '@/views/SemesterPlan.vue'
+import PomodoroTimer from '@/views/PomodoroTimer.vue'
 
 import AdminLogin from '@/views/admin/Login.vue'
 import AdminDashboard from '@/views/admin/Dashboard.vue'
@@ -35,23 +29,16 @@ const routes = [
   { path: '/register', redirect: '/login' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: { title: 'Dashboard', requiresAuth: true } },
   { path: '/tasks', name: 'Tasks', component: Tasks, meta: { title: 'Nhiệm Vụ Học Tập', requiresAuth: true } },
-  { path: '/templates', name: 'TaskTemplates', component: TaskTemplates, meta: { title: 'Mẫu Công Việc', requiresAuth: true } },
-  { path: '/kanban', name: 'Kanban', component: Kanban, meta: { title: 'Kanban Board', requiresAuth: true } },
+  { path: '/tasks/:id', name: 'TaskDetail', component: TaskDetail, meta: { title: 'Chi Tiết Nhiệm Vụ', requiresAuth: true } },
   { path: '/projects', name: 'Projects', component: Projects, meta: { title: 'Dự Án', requiresAuth: true } },
   { path: '/projects/:id', name: 'ProjectDetail', component: ProjectDetail, meta: { title: 'Chi Tiết Dự Án', requiresAuth: true } },
-  { path: '/timebox', name: 'TimeboxPlanner', component: TimeboxPlanner, meta: { title: 'Kế Hoạch Ngày', requiresAuth: true } },
   { path: '/calendar', name: 'Calendar', component: Calendar, meta: { title: 'Lịch', requiresAuth: true } },
+  { path: '/pomodoro', name: 'PomodoroTimer', component: PomodoroTimer, meta: { title: 'Pomodoro Timer', requiresAuth: true } },
+  { path: '/semester-plan', name: 'SemesterPlan', component: SemesterPlan, meta: { title: 'Mục tiêu & Kế hoạch', requiresAuth: true } },
+  { path: '/notes', name: 'Notes', component: Notes, meta: { title: 'Ghi Chú Học Tập', requiresAuth: true } },
+  { path: '/reports', name: 'Reports', component: Reports, meta: { title: 'Lộ Trình Học Tập', requiresAuth: true } },
   { path: '/profile', name: 'Profile', component: Profile, meta: { title: 'Hồ Sơ', requiresAuth: true } },
 
-  { path: '/eisenhower', name: 'EisenhowerMatrix', component: () => import('@/views/EisenhowerMatrix.vue'), meta: { title: 'Ma Trận Eisenhower', requiresAuth: true } },
-  { path: '/notes', name: 'Notes', component: Notes, meta: { title: 'Ghi Chú Học Tập', requiresAuth: true } },
-  { path: '/tasks/:id', name: 'TaskDetail', component: TaskDetail, meta: { title: 'Chi Tiết Nhiệm Vụ', requiresAuth: true } },
-  { path: '/trash', name: 'Trash', component: Trash, meta: { title: 'Thùng Rác', requiresAuth: true } },
-  { path: '/reports', name: 'Reports', component: Reports, meta: { title: 'Lộ Trình Học Tập', requiresAuth: true } },
-  { path: '/focus-room', name: 'FocusRoom', component: PremiumFocusRoom, meta: { title: 'Góc Tự Học Pomodoro', requiresAuth: true } },
-  { path: '/dependencies', name: 'DependencyGraph', component: DependencyGraph, meta: { title: 'Sơ đồ Phụ thuộc', requiresAuth: true } },
-  { path: '/semester-plan', name: 'SemesterPlan', component: SemesterPlan, meta: { title: 'Mục tiêu & Kế hoạch', requiresAuth: true } },
-  
   // Admin Routes
   { path: '/admin', redirect: '/admin/dashboard' },
   { path: '/admin/login', name: 'AdminLogin', component: AdminLogin, meta: { title: 'Đăng Nhập Admin', guest: true, layout: 'blank' } },
@@ -73,11 +60,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title || 'TaskFlow'} – TaskFlow`
 
-  // Lấy auth store
   const authStore = useAuthStore()
   const isAdminRoute = to.path.startsWith('/admin')
 
-  // Nếu là route admin
   if (isAdminRoute) {
     if (to.meta.requiresAuth && !authStore.isLoggedIn) {
       return next({ name: 'AdminLogin' })
@@ -91,7 +76,6 @@ router.beforeEach((to, from, next) => {
     return next()
   }
 
-  // Nếu là route user thường
   if (to.meta.requiresAuth && !authStore.isLoggedIn) {
     return next({ name: 'Login' })
   }
@@ -101,8 +85,7 @@ router.beforeEach((to, from, next) => {
     }
     return next({ name: 'Dashboard' })
   }
-  
-  // Nếu admin cố tình vào trang user thường thì chuyển về admin dashboard (Tách biệt hoàn toàn)
+
   if (authStore.isLoggedIn && authStore.user?.role === 'admin' && !isAdminRoute) {
     return next({ name: 'AdminDashboard' })
   }

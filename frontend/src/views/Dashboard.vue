@@ -1283,10 +1283,10 @@ const postponedTasks = computed(() => {
   .dashboard-page { padding: 0; }
   .dashboard-header { flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px; }
   .header-actions { display: flex; gap: 8px; }
-  .header-actions .btn { flex: 1; min-height: 44px; }
+  .header-actions .btn-refresh, .header-actions .btn-ai { flex: 1; min-height: 44px; }
   .dashboard-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; }
   .s-card-inner { padding: 12px; gap: 10px; }
-  .s-icon { width: 36px; height: 36px; border-radius: 10px; }
+  .s-icon-box { width: 36px; height: 36px; border-radius: 10px; }
   .s-val { font-size: 1.25rem; }
   .s-lbl { font-size: 0.75rem; }
   .dashboard-charts { grid-template-columns: 1fr; gap: 16px; padding: 0; }

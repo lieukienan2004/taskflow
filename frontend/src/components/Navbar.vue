@@ -74,6 +74,14 @@
         <span class="nav-label">Lịch</span>
       </router-link>
 
+      <router-link to="/pomodoro" class="nav-link" active-class="active" data-tooltip="Pomodoro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="nav-label">Pomodoro</span>
+      </router-link>
+
       <router-link to="/semester-plan" class="nav-link" active-class="active" data-tooltip="Mục tiêu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"/>
