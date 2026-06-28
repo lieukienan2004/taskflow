@@ -252,7 +252,7 @@ const completionPercent = computed(() => {
   border-right: 1px solid rgba(17,124,117,0.15);
   display: flex;
   flex-direction: column;
-  padding: 16px 12px;
+  padding: 20px 12px;
   z-index: 100;
   overflow-y: auto;
   overflow-x: hidden;
@@ -281,9 +281,9 @@ const completionPercent = computed(() => {
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
-  padding: 0 8px;
+  padding: 4px 8px;
   color: #117c75;
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
 }
 .collapsed .nav-logo {
