@@ -175,9 +175,9 @@
 
     <!-- Add/Edit Modal -->
     <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content modal-gpa">
+      <div class="gpa-modal-box">
         <div class="modal-top-accent"></div>
-        <div class="modal-header">
+        <div class="gpa-modal-header">
           <div class="modal-title-row">
             <div class="modal-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -326,9 +326,9 @@
 
     <!-- Delete Confirm Modal -->
     <div v-if="showDeleteModal" class="modal-overlay" @click.self="showDeleteModal = false">
-      <div class="modal-content modal-sm">
-        <div class="modal-header">
-          <h2>Xác nhận xóa</h2>
+      <div class="gpa-modal-box gpa-modal-sm">
+        <div class="gpa-modal-header" style="padding:20px 24px;border-bottom:1px solid #f1f5f9;">
+          <h2 style="margin:0;font-size:1.05rem;font-weight:700;color:#0f172a;">Xác nhận xóa</h2>
         </div>
         <p class="delete-msg">Xóa môn học <strong>{{ deletingGrade?.subject_name }}</strong>? Hành động này không thể hoàn tác.</p>
         <div class="modal-actions">
@@ -737,13 +737,11 @@ function showToast(message, type = 'success') {
 .wg-value { font-size: 1.3rem; font-weight: 800; }
 .gp-value { font-size: 1.3rem; font-weight: 800; color: #0f172a; }
 
-/* Modal */
-.modal-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(12px); }
-.modal-content { background: #fff; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.25); position: relative; }
-.modal-gpa { overflow: hidden; }
+.modal-overlay { position: fixed; inset: 0; background: #f1f5f9; display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+.gpa-modal-box { background: #ffffff !important; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.15); position: relative; color: #0f172a !important; overflow: hidden; }
 .modal-top-accent { height: 4px; background: linear-gradient(90deg, #117c75, #2dd4bf, #f4ab19); }
-.modal-sm { max-width: 400px; }
-.modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px 0; }
+.gpa-modal-sm { max-width: 400px; background: #ffffff !important; }
+.gpa-modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px 0; background: #ffffff !important; }
 .modal-title-row { display: flex; align-items: center; gap: 12px; }
 .modal-icon-box { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #117c75, #0d9488); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .modal-icon-box svg { width: 20px; height: 20px; color: #fff; }
@@ -752,7 +750,7 @@ function showToast(message, type = 'success') {
 .modal-close { background: #f1f5f9; border: none; cursor: pointer; color: #94a3b8; padding: 8px; border-radius: 10px; transition: all 0.2s; margin-top: 2px; }
 .modal-close:hover { background: #e2e8f0; color: #475569; }
 
-.modal-form { padding: 16px 24px 24px; }
+.modal-form { padding: 16px 24px 24px; background: #ffffff !important; }
 .form-section { margin-bottom: 16px; }
 .section-label { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
 .section-label svg { color: #117c75; }
@@ -768,7 +766,6 @@ function showToast(message, type = 'success') {
 .input-wrapper input:focus { outline: none; border-color: #117c75; background: #fff; box-shadow: 0 0 0 3px rgba(17,124,117,0.1); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-/* Grade Cards */
 .grade-cards { display: flex; flex-direction: column; gap: 10px; }
 .grade-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; transition: all 0.2s; }
 .grade-card:focus-within { border-color: #117c75; background: #f0fdf9; box-shadow: 0 0 0 2px rgba(17,124,117,0.08); }
@@ -821,7 +818,7 @@ function showToast(message, type = 'success') {
   .chart-section { grid-template-columns: 1fr; }
   .subjects-grid { grid-template-columns: 1fr; }
   .grade-input-row { grid-template-columns: 1fr; }
-  .modal-content { max-height: 95vh; border-radius: 16px; }
+  .gpa-modal-box { max-height: 95vh; border-radius: 16px; }
   .bar-chart { height: 150px; gap: 6px; }
   .bar-wrapper { height: 120px; }
   .bar { width: 80%; }
