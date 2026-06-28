@@ -738,7 +738,7 @@ function showToast(message, type = 'success') {
 .gp-value { font-size: 1.3rem; font-weight: 800; color: #0f172a; }
 
 /* Modal */
-.modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); }
+.modal-overlay { position: fixed; inset: 0; background: rgba(241,245,249,0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(8px); }
 .modal-content { background: #fff; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.25); position: relative; }
 .modal-gpa { overflow: hidden; }
 .modal-top-accent { height: 4px; background: linear-gradient(90deg, #117c75, #2dd4bf, #f4ab19); }
