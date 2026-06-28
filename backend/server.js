@@ -28,6 +28,7 @@ const timeLogRoutes = require('./src/routes/timeLogs');
 const subjectRoutes = require('./src/routes/subjects');
 const contactRoutes = require('./src/routes/contact');
 const reminderRoutes = require('./src/routes/reminders');
+const gradeRoutes = require('./src/routes/grades');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -93,6 +94,7 @@ app.use('/api/time-logs', timeLogRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/reminders', reminderRoutes);
+app.use('/api/grades', gradeRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

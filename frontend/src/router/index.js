@@ -12,6 +12,7 @@ import Projects from '@/views/Projects.vue'
 import ProjectDetail from '@/views/ProjectDetail.vue'
 import SemesterPlan from '@/views/SemesterPlan.vue'
 import PomodoroTimer from '@/views/PomodoroTimer.vue'
+import GPA from '@/views/GPA.vue'
 
 import AdminLogin from '@/views/admin/Login.vue'
 import AdminDashboard from '@/views/admin/Dashboard.vue'
@@ -34,6 +35,7 @@ const routes = [
   { path: '/projects/:id', name: 'ProjectDetail', component: ProjectDetail, meta: { title: 'Chi Tiết Dự Án', requiresAuth: true } },
   { path: '/calendar', name: 'Calendar', component: Calendar, meta: { title: 'Lịch', requiresAuth: true } },
   { path: '/pomodoro', name: 'PomodoroTimer', component: PomodoroTimer, meta: { title: 'Pomodoro Timer', requiresAuth: true } },
+  { path: '/gpa', name: 'GPA', component: GPA, meta: { title: 'Quản lý Điểm số', requiresAuth: true } },
   { path: '/semester-plan', name: 'SemesterPlan', component: SemesterPlan, meta: { title: 'Mục tiêu & Kế hoạch', requiresAuth: true } },
   { path: '/notes', name: 'Notes', component: Notes, meta: { title: 'Ghi Chú Học Tập', requiresAuth: true } },
   { path: '/reports', name: 'Reports', component: Reports, meta: { title: 'Lộ Trình Học Tập', requiresAuth: true } },
