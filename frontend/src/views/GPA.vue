@@ -175,85 +175,149 @@
 
     <!-- Add/Edit Modal -->
     <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
+      <div class="modal-content modal-gpa">
+        <div class="modal-top-accent"></div>
         <div class="modal-header">
-          <h2>{{ editingGrade ? 'Chỉnh sửa môn học' : 'Thêm môn học mới' }}</h2>
+          <div class="modal-title-row">
+            <div class="modal-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h2>{{ editingGrade ? 'Chỉnh sửa môn học' : 'Thêm môn học mới' }}</h2>
+              <p class="modal-subtitle">{{ editingGrade ? 'Cập nhật thông tin điểm' : 'Nhập thông tin môn học và điểm số' }}</p>
+            </div>
+          </div>
           <button class="modal-close" @click="closeModal">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
 
         <form @submit.prevent="saveGrade" class="modal-form">
-          <div class="form-group">
-            <label>Tên môn học <span class="required">*</span></label>
-            <input v-model="form.subject_name" type="text" placeholder="VD: Lập trình Web" required />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Số tín chỉ <span class="required">*</span></label>
-              <input v-model.number="form.credits" type="number" min="1" max="10" required />
+          <div class="form-section">
+            <div class="section-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              Thông tin cơ bản
             </div>
             <div class="form-group">
-              <label>Ngày thi</label>
-              <input v-model="form.exam_date" type="date" />
+              <label>Tên môn học <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                <input v-model="form.subject_name" type="text" placeholder="VD: Lập trình Web" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Số tín chỉ <span class="required">*</span></label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                  <input v-model.number="form.credits" type="number" min="1" max="10" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Ngày thi</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <input v-model="form.exam_date" type="date" />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="form-divider">
-            <span>Điểm thành phần</span>
-            <small>Tổng phải = 100%</small>
-          </div>
-
-          <div class="grade-inputs">
-            <div class="grade-input-row">
-              <div class="gi-left">
-                <label>Chuyên cần</label>
-                <input v-model.number="form.grade_attendance" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
-              </div>
-              <div class="gi-right">
-                <label>Trọng số (%)</label>
-                <input v-model.number="form.weight_attendance" type="number" min="0" max="100" />
-              </div>
+          <div class="form-section">
+            <div class="section-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+              Điểm thành phần
+              <span class="weight-badge" :class="{ 'weight-ok': weightTotal === 100 }">{{ weightTotal }}%</span>
             </div>
 
-            <div class="grade-input-row">
-              <div class="gi-left">
-                <label>Giữa kỳ</label>
-                <input v-model.number="form.grade_midterm" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
+            <div class="grade-cards">
+              <div class="grade-card">
+                <div class="gc-header">
+                  <div class="gc-dot" style="background:#10b981"></div>
+                  <span class="gc-name">Chuyên cần</span>
+                </div>
+                <div class="gc-inputs">
+                  <div class="gc-field">
+                    <label>Điểm</label>
+                    <input v-model.number="form.grade_attendance" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
+                  </div>
+                  <div class="gc-field">
+                    <label>Trọng số</label>
+                    <div class="weight-input">
+                      <input v-model.number="form.weight_attendance" type="number" min="0" max="100" />
+                      <span class="weight-unit">%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="gi-right">
-                <label>Trọng số (%)</label>
-                <input v-model.number="form.weight_midterm" type="number" min="0" max="100" />
-              </div>
-            </div>
 
-            <div class="grade-input-row">
-              <div class="gi-left">
-                <label>Cuối kỳ</label>
-                <input v-model.number="form.grade_final" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
+              <div class="grade-card">
+                <div class="gc-header">
+                  <div class="gc-dot" style="background:#f59e0b"></div>
+                  <span class="gc-name">Giữa kỳ</span>
+                </div>
+                <div class="gc-inputs">
+                  <div class="gc-field">
+                    <label>Điểm</label>
+                    <input v-model.number="form.grade_midterm" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
+                  </div>
+                  <div class="gc-field">
+                    <label>Trọng số</label>
+                    <div class="weight-input">
+                      <input v-model.number="form.weight_midterm" type="number" min="0" max="100" />
+                      <span class="weight-unit">%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="gi-right">
-                <label>Trọng số (%)</label>
-                <input v-model.number="form.weight_final" type="number" min="0" max="100" />
+
+              <div class="grade-card">
+                <div class="gc-header">
+                  <div class="gc-dot" style="background:#ef4444"></div>
+                  <span class="gc-name">Cuối kỳ</span>
+                </div>
+                <div class="gc-inputs">
+                  <div class="gc-field">
+                    <label>Điểm</label>
+                    <input v-model.number="form.grade_final" type="number" step="0.1" min="0" max="10" placeholder="0-10" />
+                  </div>
+                  <div class="gc-field">
+                    <label>Trọng số</label>
+                    <div class="weight-input">
+                      <input v-model.number="form.weight_final" type="number" min="0" max="100" />
+                      <span class="weight-unit">%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="weight-warning" v-if="weightTotal !== 100">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            Tổng trọng số: {{ weightTotal }}% (phải = 100%)
+            Tổng trọng số: {{ weightTotal }}% — Phải bằng 100%
           </div>
 
           <div class="form-preview" v-if="previewGrade !== null">
-            <span>Điểm tổng kết: </span>
-            <strong :style="{ color: previewColor }">{{ previewGrade }} → {{ previewLetter }}</strong>
+            <div class="preview-left">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Điểm tổng kết</span>
+            </div>
+            <div class="preview-right">
+              <span class="preview-score" :style="{ color: previewColor }">{{ previewGrade }}</span>
+              <span class="preview-letter" :style="{ background: previewColor, color: '#fff' }">{{ previewLetter }}</span>
+            </div>
           </div>
 
           <div class="modal-actions">
-            <button type="button" class="btn-cancel" @click="closeModal">Hủy</button>
+            <button type="button" class="btn-cancel" @click="closeModal">Hủy bỏ</button>
             <button type="submit" class="btn-save" :disabled="saving">
-              {{ saving ? 'Đang lưu...' : (editingGrade ? 'Cập nhật' : 'Thêm mới') }}
+              <svg v-if="!saving" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              {{ saving ? 'Đang lưu...' : (editingGrade ? 'Cập nhật' : 'Thêm môn học') }}
             </button>
           </div>
         </form>
@@ -674,45 +738,70 @@ function showToast(message, type = 'success') {
 .gp-value { font-size: 1.3rem; font-weight: 800; color: #0f172a; }
 
 /* Modal */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(4px); }
-.modal-content { background: #fff; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); }
+.modal-content { background: #fff; border-radius: 20px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.25); position: relative; }
+.modal-gpa { overflow: hidden; }
+.modal-top-accent { height: 4px; background: linear-gradient(90deg, #117c75, #2dd4bf, #f4ab19); }
 .modal-sm { max-width: 400px; }
-.modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 0; }
-.modal-header h2 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0; }
-.modal-close { background: none; border: none; cursor: pointer; color: #94a3b8; padding: 4px; border-radius: 8px; transition: all 0.2s; }
-.modal-close:hover { background: #f1f5f9; color: #475569; }
+.modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px 0; }
+.modal-title-row { display: flex; align-items: center; gap: 12px; }
+.modal-icon-box { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #117c75, #0d9488); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.modal-icon-box svg { width: 20px; height: 20px; color: #fff; }
+.modal-header h2 { font-size: 1.05rem; font-weight: 700; color: #0f172a; margin: 0; }
+.modal-subtitle { font-size: 0.78rem; color: #94a3b8; margin: 2px 0 0; }
+.modal-close { background: #f1f5f9; border: none; cursor: pointer; color: #94a3b8; padding: 8px; border-radius: 10px; transition: all 0.2s; margin-top: 2px; }
+.modal-close:hover { background: #e2e8f0; color: #475569; }
 
-.modal-form { padding: 20px 24px 24px; }
-.form-group { margin-bottom: 14px; }
-.form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 6px; }
+.modal-form { padding: 16px 24px 24px; }
+.form-section { margin-bottom: 16px; }
+.section-label { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.section-label svg { color: #117c75; }
+.weight-badge { margin-left: auto; background: #fef3c7; color: #92400e; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; }
+.weight-badge.weight-ok { background: #d1fae5; color: #065f46; }
+
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 5px; }
 .required { color: #ef4444; }
-.form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 0.88rem; color: #0f172a; background: #fff; transition: border-color 0.2s; box-sizing: border-box; }
-.form-group input:focus, .form-group select:focus { outline: none; border-color: #117c75; box-shadow: 0 0 0 3px rgba(17,124,117,0.1); }
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.input-icon { position: absolute; left: 12px; color: #94a3b8; pointer-events: none; flex-shrink: 0; }
+.input-wrapper input { width: 100%; padding: 10px 12px 10px 36px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.88rem; color: #0f172a; background: #f8fafc; transition: all 0.2s; box-sizing: border-box; }
+.input-wrapper input:focus { outline: none; border-color: #117c75; background: #fff; box-shadow: 0 0 0 3px rgba(17,124,117,0.1); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.form-divider { display: flex; align-items: center; justify-content: space-between; margin: 16px 0 14px; padding-bottom: 8px; border-bottom: 1px solid #f1f5f9; }
-.form-divider span { font-size: 0.85rem; font-weight: 600; color: #334155; }
-.form-divider small { font-size: 0.75rem; color: #94a3b8; }
+/* Grade Cards */
+.grade-cards { display: flex; flex-direction: column; gap: 10px; }
+.grade-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; transition: all 0.2s; }
+.grade-card:focus-within { border-color: #117c75; background: #f0fdf9; box-shadow: 0 0 0 2px rgba(17,124,117,0.08); }
+.gc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.gc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.gc-name { font-size: 0.82rem; font-weight: 600; color: #334155; }
+.gc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gc-field label { display: block; font-size: 0.72rem; font-weight: 500; color: #64748b; margin-bottom: 3px; }
+.gc-field input { width: 100%; padding: 8px 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.85rem; color: #0f172a; background: #fff; transition: all 0.2s; box-sizing: border-box; }
+.gc-field input:focus { outline: none; border-color: #117c75; box-shadow: 0 0 0 2px rgba(17,124,117,0.1); }
+.weight-input { position: relative; display: flex; align-items: center; }
+.weight-input input { padding-right: 24px; }
+.weight-unit { position: absolute; right: 8px; font-size: 0.75rem; font-weight: 600; color: #94a3b8; pointer-events: none; }
 
-.grade-inputs { display: flex; flex-direction: column; gap: 10px; }
-.grade-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.gi-left label, .gi-right label { display: block; font-size: 0.78rem; font-weight: 500; color: #64748b; margin-bottom: 4px; }
-.gi-left input, .gi-right input { width: 100%; padding: 9px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.85rem; color: #0f172a; box-sizing: border-box; }
-.gi-left input:focus, .gi-right input:focus { outline: none; border-color: #117c75; }
+.weight-warning { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #fef3c7; border: 1px solid #fde68a; border-radius: 10px; font-size: 0.82rem; font-weight: 500; color: #92400e; margin-top: 12px; }
 
-.weight-warning { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fef3c7; border-radius: 8px; font-size: 0.8rem; color: #92400e; margin-top: 10px; }
+.form-preview { margin-top: 12px; padding: 12px 16px; background: linear-gradient(135deg, #f0fdf9, #ecfdf5); border: 1px solid #a7f3d0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; }
+.preview-left { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #065f46; font-weight: 500; }
+.preview-left svg { color: #10b981; }
+.preview-right { display: flex; align-items: center; gap: 8px; }
+.preview-score { font-size: 1.3rem; font-weight: 800; }
+.preview-letter { font-size: 0.78rem; font-weight: 800; padding: 3px 10px; border-radius: 8px; }
 
-.form-preview { margin-top: 12px; padding: 10px 14px; background: #f0fdf9; border-radius: 10px; font-size: 0.88rem; color: #334155; }
-.form-preview strong { margin-left: 4px; }
-
-.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-.btn-cancel { padding: 10px 20px; border: 1px solid #e2e8f0; border-radius: 10px; background: #fff; color: #475569; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-cancel:hover { background: #f8fafc; }
-.btn-save { padding: 10px 24px; border: none; border-radius: 10px; background: #117c75; color: #fff; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.btn-save:hover { background: #0d9488; }
-.btn-save:disabled, .btn-delete:disabled { opacity: 0.5; cursor: not-allowed; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
+.btn-cancel { padding: 10px 20px; border: 1.5px solid #e2e8f0; border-radius: 10px; background: #fff; color: #475569; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-cancel:hover { background: #f8fafc; border-color: #cbd5e1; }
+.btn-save { display: flex; align-items: center; gap: 6px; padding: 10px 24px; border: none; border-radius: 10px; background: linear-gradient(135deg, #117c75, #0d9488); color: #fff; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-save:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(17,124,117,0.35); }
+.btn-save:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-save:disabled:hover { transform: none; box-shadow: none; }
 .btn-delete { padding: 10px 24px; border: none; border-radius: 10px; background: #ef4444; color: #fff; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
 .btn-delete:hover { background: #dc2626; }
+.btn-delete:disabled { opacity: 0.5; cursor: not-allowed; }
 .delete-msg { padding: 16px 24px; font-size: 0.9rem; color: #475569; line-height: 1.5; }
 
 /* Toast */
