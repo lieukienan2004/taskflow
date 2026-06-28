@@ -231,6 +231,13 @@ export const googleAuthApi = {
   login: (data) => api.post('/auth/google', data),
 }
 
+export const gradeApi = {
+  getAll: () => api.get('/grades'),
+  create: (data) => api.post('/grades', data),
+  update: (id, data) => api.put(`/grades/${id}`, data),
+  delete: (id) => api.delete(`/grades/${id}`),
+}
+
 export default api
 
 

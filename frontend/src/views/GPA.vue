@@ -283,7 +283,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import api from '@/axios'
+import { gradeApi } from '@/api/taskApi'
 
 const grades = ref([])
 const loading = ref(true)
@@ -333,7 +333,7 @@ onMounted(() => {
 async function fetchGrades() {
   loading.value = true
   try {
-    const { data } = await api.get('/api/grades')
+    const { data } = await gradeApi.getAll()
     grades.value = data.data || []
   } catch (e) {
     console.error(e)
@@ -521,10 +521,10 @@ async function saveGrade() {
     if (!payload.exam_date) payload.exam_date = null
 
     if (editingGrade.value) {
-      await api.put(`/api/grades/${editingGrade.value.id}`, payload)
+      await gradeApi.update(editingGrade.value.id, payload)
       showToast('Cập nhật thành công!', 'success')
     } else {
-      await api.post('/api/grades', payload)
+      await gradeApi.create(payload)
       showToast('Thêm môn học thành công!', 'success')
     }
     closeModal()
@@ -544,7 +544,7 @@ function confirmDelete(g) {
 async function deleteGrade() {
   saving.value = true
   try {
-    await api.delete(`/api/grades/${deletingGrade.value.id}`)
+    await gradeApi.delete(deletingGrade.value.id)
     showToast('Đã xóa môn học', 'success')
     showDeleteModal.value = false
     await fetchGrades()
