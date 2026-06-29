@@ -17,13 +17,9 @@ const aiRoutes = require('./src/routes/ai');
 const projectRoutes = require('./src/routes/projects');
 const milestoneRoutes = require('./src/routes/milestones');
 
-const classScheduleRoutes = require('./src/routes/classSchedules');
-const friendshipRoutes = require('./src/routes/friendships');
-const flashcardRoutes = require('./src/routes/flashcards');
 const noteRoutes = require('./src/routes/notes');
 const gamificationRoutes = require('./src/routes/gamification');
 const semesterPlanRoutes = require('./src/routes/semesterPlans');
-const habitRoutes = require('./src/routes/habits');
 const timeLogRoutes = require('./src/routes/timeLogs');
 const subjectRoutes = require('./src/routes/subjects');
 const contactRoutes = require('./src/routes/contact');
@@ -83,13 +79,9 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects/:projectId/milestones', milestoneRoutes);
 
-app.use('/api/class-schedules', classScheduleRoutes);
-app.use('/api/friendships', friendshipRoutes);
-app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/gamification', gamificationRoutes);
 app.use('/api/semester-plans', semesterPlanRoutes);
-app.use('/api/habits', habitRoutes);
 app.use('/api/time-logs', timeLogRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/contact', contactRoutes);

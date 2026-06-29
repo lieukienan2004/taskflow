@@ -127,34 +127,6 @@ export const aiApi = {
   quizFromNote: (title, content) => api.post('/ai/quiz-from-note', { title, content }),
 }
 
-export const classScheduleApi = {
-  getAll: () => api.get('/class-schedules'),
-  create: (data) => api.post('/class-schedules', data),
-  update: (id, data) => api.put(`/class-schedules/${id}`, data),
-  delete: (id) => api.delete(`/class-schedules/${id}`),
-}
-
-export const friendshipApi = {
-  getAll: () => api.get('/friendships'),
-  sendRequest: (email) => api.post('/friendships/request', { email }),
-  acceptRequest: (id) => api.post(`/friendships/accept/${id}`),
-  removeFriendship: (id) => api.delete(`/friendships/${id}`),
-}
-
-export const flashcardApi = {
-  getDecks: () => api.get('/flashcards/decks'),
-  getDeckById: (id) => api.get(`/flashcards/decks/${id}`),
-  createDeck: (data) => api.post('/flashcards/decks', data),
-  updateDeck: (id, data) => api.put(`/flashcards/decks/${id}`, data),
-  deleteDeck: (id) => api.delete(`/flashcards/decks/${id}`),
-  getCards: (deckId) => api.get(`/flashcards/decks/${deckId}/cards`),
-  createCard: (data) => api.post('/flashcards/cards', data),
-  updateCard: (id, data) => api.put(`/flashcards/cards/${id}`, data),
-  deleteCard: (id) => api.delete(`/flashcards/cards/${id}`),
-  getDueCards: (deckId) => api.get(`/flashcards/decks/${deckId}/review`),
-  reviewCard: (id, rating) => api.post(`/flashcards/cards/${id}/review`, { rating })
-}
-
 export const noteApi = {
   getAll: () => api.get('/notes'),
   getById: (id) => api.get(`/notes/${id}`),
@@ -193,16 +165,6 @@ export const semesterPlanApi = {
   deleteKeyResult: (planId, objectiveId, krId) => api.delete(`/semester-plans/${planId}/objectives/${objectiveId}/key-results/${krId}`),
   linkTask: (planId, objectiveId, taskId) => api.post(`/semester-plans/${planId}/objectives/${objectiveId}/tasks`, { task_id: taskId }),
   unlinkTask: (planId, objectiveId, taskId) => api.delete(`/semester-plans/${planId}/objectives/${objectiveId}/tasks/${taskId}`),
-}
-
-export const habitApi = {
-  getAll: () => api.get('/habits'),
-  getById: (id) => api.get(`/habits/${id}`),
-  create: (data) => api.post('/habits', data),
-  update: (id, data) => api.put(`/habits/${id}`, data),
-  delete: (id) => api.delete(`/habits/${id}`),
-  toggleDay: (id, date) => api.post(`/habits/${id}/toggle`, { date }),
-  getStats: () => api.get('/habits/stats'),
 }
 
 export const timeLogApi = {

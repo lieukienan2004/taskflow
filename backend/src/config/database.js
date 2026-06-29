@@ -219,21 +219,6 @@ async function safeCreateTable(pool, sql, label) {
       console.warn('[Migration] fk_task_subject:', e.message);
     }
 
-    // Tạo bảng class_schedules (Thời khóa biểu học tập)
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS class_schedules (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        subject_name VARCHAR(255) NOT NULL,
-        day_of_week INT NOT NULL,
-        start_time TIME NOT NULL,
-        end_time TIME NOT NULL,
-        room VARCHAR(100) NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'class_schedules');
-
     // 1. Sửa lỗi thiếu cột deleted_at và status trong projects
     try {
       await pool.execute(`ALTER TABLE projects ADD COLUMN IF NOT EXISTS deleted_at TIMESTAMP NULL DEFAULT NULL`);
@@ -292,33 +277,6 @@ async function safeCreateTable(pool, sql, label) {
       console.warn('[Migration] fk_task_assigned:', e.message);
     }
 
-    // 5. Tạo bảng friendships
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS friendships (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        friend_id INT NOT NULL,
-        status ENUM('pending', 'accepted') DEFAULT 'pending',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        FOREIGN KEY (friend_id) REFERENCES users(id) ON DELETE CASCADE,
-        UNIQUE KEY unique_friendship (user_id, friend_id)
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'friendships');
-
-    // 6. Tạo bảng project_chats
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS project_chats (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        project_id INT NOT NULL,
-        user_id INT NOT NULL,
-        message TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'project_chats');
-
     // 7. Thêm cột eisenhower_quadrant cho bảng tasks (Ma trận Eisenhower)
     try {
       await pool.execute(
@@ -329,37 +287,6 @@ async function safeCreateTable(pool, sql, label) {
         console.warn('[Migration] tasks eisenhower_quadrant column:', e.message);
       }
     }
-
-    // 10. Tạo bảng flashcard_decks (Bộ thẻ ghi nhớ)
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS flashcard_decks (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        name VARCHAR(255) NOT NULL,
-        description TEXT NULL,
-        color VARCHAR(50) DEFAULT '#D4AF37',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'flashcard_decks');
-
-    // 11. Tạo bảng flashcards (Thẻ ghi nhớ với các thông số thuật toán SM-2)
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS flashcards (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        deck_id INT NOT NULL,
-        front TEXT NOT NULL,
-        back TEXT NOT NULL,
-        ease_factor DECIMAL(5, 2) DEFAULT 2.50,
-        repetitions INT DEFAULT 0,
-        interval_days INT DEFAULT 0,
-        next_review DATETIME DEFAULT CURRENT_TIMESTAMP,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (deck_id) REFERENCES flashcard_decks(id) ON DELETE CASCADE
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'flashcards');
 
     // 12. Tao bang notes
     await safeCreateTable(pool, `
@@ -579,35 +506,6 @@ async function safeCreateTable(pool, sql, label) {
     } catch (e) {
       console.warn('[Migration] projects.subject_id FK:', e.message);
     }
-
-    // 23. Tao bang habits (Quan ly thoi quen)
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS habits (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        name VARCHAR(255) NOT NULL,
-        description TEXT NULL,
-        icon VARCHAR(20) DEFAULT '📚',
-        goal ENUM('daily','weekly','custom') DEFAULT 'daily',
-        current_streak INT DEFAULT 0,
-        best_streak INT DEFAULT 0,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'habits');
-
-    // 24. Tao bang habit_logs (Nhat ky hoan thanh thoi quen)
-    await safeCreateTable(pool, `
-      CREATE TABLE IF NOT EXISTS habit_logs (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        habit_id INT NOT NULL,
-        completed_date DATE NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (habit_id) REFERENCES habits(id) ON DELETE CASCADE,
-        UNIQUE KEY unique_habit_date (habit_id, completed_date)
-      ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
-    `, 'habit_logs');
 
     // 25. Tao bang time_logs (Theo doi thoi gian lam viec tren task)
     await safeCreateTable(pool, `
